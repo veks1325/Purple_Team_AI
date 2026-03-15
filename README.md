@@ -1,5 +1,5 @@
 # NLP기반 익스플로잇 코드 생성 자동화 시스템 설계
-*(Automatic Exploit Generation and Enhancement using NLP-based Techniques)*
+*Automatic Exploit Generation and Enhancement using NLP-based Techniques*
 
 ## 프로젝트 소개
 최근 제로데이 취약점의 발견 및 악용 속도가 빨라지고 있으며, 해커들은 AI 및 머신러닝을 활용해 공격을 더욱 정교하게 수행하고 있습니다. 기존의 퍼저(fuzzer)나 사후 대응 방식만으로는 이러한 고도화된 공격을 방어하는 데 한계가 있습니다. 
