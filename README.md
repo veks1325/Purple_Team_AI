@@ -1,42 +1,28 @@
-# Purple_Team_AI
-- This project, Purple_Team_AI, is focused on developing an innovative cybersecurity solution by integrating advanced techniques from Red Team, Blue Team, and Purple Team methodologies.
-- An SOAR solution that can block known vulnerabilities and zero-day attacks through attacks and defenses between the RL-based automated penetration test Red Team (Fuzzing, AEG) and the automated patch system Blue Team
-The goal is to implement an automation MVP model that automates the generation of exploit codes for vulnerabilities that were discovered during the project. 
-Target not determined
-ex) 
-1. Automatic Fuzzing Test-based : windows programs etc..
-2. Web application-based
-3. Sysyem network-based
+# [cite_start]NLP기반 익스플로잇 코드 생성 자동화 시스템 설계 [cite: 1]
+[cite_start]*(Automatic Exploit Generation and Enhancement using NLP-based Techniques)* [cite: 5, 7]
 
-# Red Team <-- WhiteHatSchool Project 
-- The Red Team leverages expertise in AEG (Automatci Exploit Generation) techniques and reinforcement learning algorithms such as A3C and Q-learning. Automated penetration testing, driven by meta-exploits, prioritizes successful penetrations via vulnerabilities. The model is trained with a weighted emphasis on successful penetration based on vulnerabilities.
-1. binary code-based Automatic Exploit Generation(AEG)
-2. A3C, Q-learning etc.. RL agorithms Status, Environment(OpenAI) build
-	 - Status : network information through network scanning
-	 - Weighing : Vnlnerability Found
-3. Make automatic Analysis Report
-4. Automatic Penetration simulation <-- Matasploit
-5. Make PlayBook 
+## 📌 프로젝트 소개
+[cite_start]최근 제로데이 취약점의 발견 및 악용 속도가 빨라지고 있으며 [cite: 12][cite_start], 해커들은 AI 및 머신러닝을 활용해 공격을 더욱 정교하게 수행하고 있습니다[cite: 13, 24]. [cite_start]기존의 퍼저(fuzzer)나 사후 대응 방식만으로는 이러한 고도화된 공격을 방어하는 데 한계가 있습니다[cite: 14, 25]. 
 
-# Blue Team
-- The Blue Team receives outputs from Red Team AI, including explored vulnerabilities and corresponding exploit codes. They implement automated patches and build secure systems, ensuring vulnerabilities are effectively mitigated.
-1. Vulnerability-based automated patching discovered
-2. SOAR Solution
-3. Report on the Web 
+[cite_start]본 프로젝트는 자연어 처리(NLP) 기술과 LLama 모델 아키텍처를 활용하여, 웹 환경의 주요 취약점인 SQL Injection과 XSS(Cross Site Scripting)를 사전에 점검할 수 있는 익스플로잇 코드 자동 생성 모델을 설계하고 구현했습니다[cite: 16, 17, 26]. 
 
-# Purple Team
-- The Purple Team focuses on the collaborative synergy between Red Team AI and Blue Team AI's MVPs. The goal is to derive an AI-based next-generation Security Orchestration, Automation, and Response (SOAR) solution when both Red Team and Blue Team MVPs are implemented.
+## ⚙️ 데이터셋 구축 및 전처리
+본 모델은 정형화된 익스플로잇 코드를 효율적으로 학습하기 위해 다음과 같은 데이터 전처리 파이프라인을 거쳤습니다.
 
-# MVP Model
-- The MVP Model aims to construct a minimal functional prototype within a specific domain (e.g., web, Windows PowerShell). This prototype demonstrates the core capabilities of the Purple Team AI solution.
+* [cite_start]**One-Line Code 변환**: 익스플로잇 코드를 학습시키기 위해 이스케이프 문자를 처리 가능한 데이터 형식으로 변경하거나 토크나이저를 수정하여, 모든 페이로드를 한 줄의 코드로 정형화했습니다[cite: 61, 62].
+* [cite_start]**SQL Injection 데이터셋**: SQL Injection Cheat Sheet의 다양한 구문을 정형화했습니다[cite: 71]. [cite_start]이후 HTML 태그나 JavaScript 코드 등의 특수 문자를 제거 및 대체하여 데이터를 정제된 텍스트로 생성했습니다[cite: 72, 73].
+* [cite_start]**XSS 데이터셋**: GitHub, OWASP, PortSwigger Cheat Sheet의 여러 구문을 기반으로 XSS 페이로드를 수집 및 정형화했습니다[cite: 81].
+* [cite_start]**토큰화 및 어휘 크기 최적화**: 중복된 페이로드를 제거하여 데이터의 균형을 유지한 뒤 [cite: 74, 83][cite_start], 토크나이저를 통해 데이터를 토큰 단위로 분할했습니다[cite: 74, 85]. [cite_start]데이터셋 크기와 메모리 제약을 고려하여 어휘 크기를 8000, 10000, 12000, 14000으로 각각 설정해 모델을 학습시켰습니다[cite: 76, 84].
 
-# What Should We Do
-- Implement technical frameworks required for Red Team and Blue Team functionalities.
-Develop algorithms and automation processes essential for Red Team's penetration testing and Blue Team's automated patching.
-- Setting a Targeting
-1. Automatic Fuzzing Test-based : windows programs
-2. Web application-based
-3. Sysyem network-based
+## 🧠 모델 아키텍처 (Model Architecture)
+[cite_start]사전 학습(pretraining)을 위해 LLama와 유사한 구조를 가진 언어 모델을 구성했습니다[cite: 89].
 
-# Start-Up
-- At this stage, the project's start-up involves defining the project scope, outlining team roles, and planning the initial technical implementation. The team will focus on setting clear goals, determining technological requirements, and establishing the foundational framework for the Purple Team AI project.
+* [cite_start]**Tokenizer**: 악성코드의 구조적 특성이 영어 문장과 유사하다는 점을 고려하여, bpe 알고리즘을 지원하는 `sentencepiece`를 사용했습니다[cite: 91].
+* [cite_start]**Attention Mechanism**: 본 연구에서 사전 학습하고자 하는 언어 모델에는 Multi-Head Attention 메커니즘을 적용했습니다[cite: 94].
+* [cite_start]**Positional Embedding**: 복소수로의 변환과 회전을 통해 포지셔널 임베딩을 효과적으로 주입하여 장기적인 의존성을 유지할 수 있는 접근법을 채택했습니다[cite: 96, 97].
+* [cite_start]**Activation Function**: LLama 모델의 특성을 반영하여, 기존 4d 파라미터 대신 2/3 4d 파라미터를 적용한 변형된 SWIGLU 활성화 함수를 활용했습니다[cite: 99, 100].
+* [cite_start]**Optimizer**: LLama 아키텍처에서 사용된 AdamW 옵티마이저와 더불어 Adam 옵티마이저를 추가로 사용하여, 두 가지 방식으로 모델 트레이닝을 진행했습니다[cite: 102, 103].
+
+## 🚀 시뮬레이션 및 결과 검증
+* [cite_start]`generate` 함수를 통해 익스플로잇 코드를 성공적으로 생성했습니다[cite: 105].
+* [cite_start]취약점 테스트 환경인 DVWA(Damn Vulnerable Web Application)의 SQL Injection 파트에서 low 레벨을 대상으로 검증한 결과, 익스플로잇이 성공적으로 수행됨을 확인했습니다[cite: 117].
