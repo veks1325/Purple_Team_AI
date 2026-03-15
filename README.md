@@ -24,5 +24,4 @@
 * **Optimizer**: LLama 아키텍처에서 사용된 AdamW 옵티마이저와 더불어 Adam 옵티마이저를 추가로 사용하여, 두 가지 방식으로 모델 트레이닝을 진행했습니다.
 
 ## 시뮬레이션 및 결과 검증
-* `generate` 함수를 통해 익스플로잇 코드를 성공적으로 생성했습니다.
 * 취약점 테스트 환경인 DVWA(Damn Vulnerable Web Application)의 SQL Injection 파트에서 low 레벨을 대상으로 검증한 결과, 익스플로잇이 성공적으로 수행됨을 확인했습니다.
